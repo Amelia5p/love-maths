@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+
     runGame("addition");
 
 });
@@ -25,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 function runGame(gameType) {
 
-    document.getElementById("answer-box").value="";
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
 
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
@@ -43,7 +50,6 @@ function runGame(gameType) {
     }
 
 }
-
 
 /**
  * Checks the answer against the first element in
@@ -81,12 +87,14 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
-    } else if(operator === "-") {
-        return[operand1 - operand2, "subtract"]
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
-    }}
+    }
+
+}
 
 /**
  * Gets the current score from the DOM and increments it by 1
@@ -117,8 +125,9 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1: operand2;
-    document.getElementById('operand2').textContent = operand1 > operand2? operand2: operand1;
+
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "-";
 
 }
@@ -128,4 +137,5 @@ function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
+
 }
